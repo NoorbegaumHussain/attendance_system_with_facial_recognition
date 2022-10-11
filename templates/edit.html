@@ -1,0 +1,86 @@
+{% extends "studenttemplate.html" %}
+{% block title %}Edit{% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <form class="col-md-8 offset-md-2 border p-5 mt-5" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <table class="col-md-6">
+                    <tr>
+                        <td><label for="departments">Department</label></td>
+                        <td>
+                            <select name="department" id="departments" class="form-select">
+                                {% for i in departments %}
+                                <option value="{{i[0]}}" id="department{{i[0]}}" years="{{i[2]}}">{{i[1]}}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="name">Name</label></td>
+                        <td><input type="text" name="name" id="name" class="form-control" value="{{student[2]}}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="usn">USN</label></td>
+                        <td><input type="text" name="usn" id="usn" class="form-control" value="{{student[1]}}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="semesters">Semester</label></td>
+                        <td>
+                            <select name="semester" id="semesters" class="form-select">
+                                {% for i in semesters %}
+                                <option value="{{i}}">{{i}}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="col-md-6">
+                    <tr>
+                        <td><label for="divisions">Division</label></td>
+                        <td>
+                            <select name="division" id="divisions" class="form-select">
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="mobile">Mobile No.</label></td>
+                        <td><input type="text" name="mobile" id="mobile" class="form-control" value="{{student[4]}}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email">Email</label></td>
+                        <td><input type="email" name="email" id="email" class="form-control" value="{{student[5]}}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="image">Image</label></td>
+                        <td><input type="file" name="image" id="image" class="form-control"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="row">
+                <input type="submit" value="Save" class="btn btn-primary w-25 offset-md-5 mt-5">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+    document.querySelector("option[value='{{departmentid}}']").setAttribute("selected","selected");
+    document.querySelector("option[value='{{semestername}}']").setAttribute("selected","selected");
+    document.querySelector("option[value='{{divisionname}}']").setAttribute("selected","selected");
+    semesters = ["I st","II nd","III rd","IV th","V th","VI th","VII th","VIII th"];
+    document.getElementById("departments").addEventListener("change",function(){
+        years = parseInt(document.getElementById("department"+this.value).getAttribute("years"));
+        option = '';
+        for(i=0;i<years*2;i++)
+        {
+            option += `<option>${semesters[i]}</option>`;
+        }
+        document.getElementById("semesters").innerHTML = option;
+    });
+</script>
+{% endblock %}

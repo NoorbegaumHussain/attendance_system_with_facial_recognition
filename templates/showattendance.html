@@ -1,0 +1,19 @@
+{% extends "teachertemplate.html" %}
+{% block title %}Attendance{% endblock %}
+{% block body %}
+<table class="table">
+    <legend class="text-center">Attendance</legend>
+    <tr>
+        <th>S. No.</th>
+        <th>Name</th>
+        <th>isPresent</th>
+    </tr>
+    {% for date in attendance %}
+    <tr>
+        <td>{{loop.index}}</td>
+        <td>{{names[date[0]]}}</td>
+        <td>{%if(date[1])%} P {%else%} A {%endif%}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

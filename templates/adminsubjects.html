@@ -1,0 +1,21 @@
+{% extends "admintemplate.html" %}
+{% block title %}Classes{% endblock %}
+{% block body %}
+<table class="table">
+    <legend class="text-center">Subjects <a href="/adminaddsubject?id={{request.args.get('id')}}" class="h6">Add</a></legend>
+    <tr>
+        <th>S. No.</th>
+        <th>Name</th>
+        <th>Optional</th>
+        <th>Edit</th>
+    </tr>
+    {% for subject in subjects %}
+    <tr>
+        <td>{{loop.index}}</td>
+        <td>{{subject[2]}}</td>
+        <td>{{subject[3]}}</td>
+        <td><a href="/admineditsubject?id={{subject[0]}}&classid={{subject[1]}}">Edit</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

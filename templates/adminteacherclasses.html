@@ -1,0 +1,25 @@
+{% extends "admintemplate.html" %}
+{% block title %}Teacher Classes{% endblock %}
+{% block body %}
+<form method="post">
+    <table class="table">
+        <legend class="text-center"><input type="submit" value="Save" class="btn btn-success"></legend>
+        <tr>
+            <th>S. No.</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Semester</th>
+            <th>Division</th>
+        </tr>
+        {% for class in classes %}
+        <tr>
+            <td><label><input type="checkbox" name="{{class[0]}}" {% if(class[0] in teachersclasses) %} checked {%endif%}> {{loop.index}}</label></td>
+            <td>{{class[1]}}</td>
+            <td>{{class[2]}}</td>
+            <td>{{class[3]}}</td>
+            <td>{{class[4]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</form>
+{% endblock %}

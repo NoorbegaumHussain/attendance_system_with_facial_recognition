@@ -1,0 +1,79 @@
+{% extends "template.html" %}
+{% block title %}Register{% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <form class="col-md-6 offset-md-3 border p-5 mt-5 text-center" method="post" enctype="multipart/form-data">
+            <img src="/static/imgs/logo.jpg" width="100" class="rounded-circle">
+            <div class="my-2">
+                <h3>Register</h3>
+            </div>
+            {% if lastdate >= todaydate %}
+            <div class="alert alert-warning">
+                Last registration date is {{lastdate}}.
+            </div>
+            {% else %}
+            <div class="alert alert-danger">
+                Registration closed.
+            </div>
+            {% endif %}
+
+            <div class="my-2">
+                <select name="department" id="departments" class="form-select" required>
+                    <option disabled hidden selected>Choose Department</option>
+                    {% for i in departments %}
+                        <option value="{{i[0]}}" id="department{{i[0]}}" years="{{i[2]}}">{{i[1]}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="my-2">
+                <input type="text" name="name" class="form-control" placeholder="Enter Name" required>
+            </div>
+            <div class="my-2">
+                <input type="text" name="usn" class="form-control" placeholder="Enter USN" required maxlength="10">
+            </div>
+            <div class="my-2">
+                <input type="text" name="mobile" class="form-control" placeholder="Enter Mobile No." required>
+            </div>
+            <div class="my-2">
+                <input type="email" name="email" class="form-control" placeholder="Enter Email" required>
+            </div>
+            <div class="my-2">
+                <select name="semester" id="semesters" class="form-select" required>
+                    <option disabled hidden selected>Choose Semester</option>
+                </select>
+            </div>
+            <div class="my-2">
+                <select name="division" id="divisions" class="form-select" required>
+                    <option disabled hidden selected>Choose Division</option>
+                    <option>A</option>
+                    <option>B</option>
+                </select>
+            </div>
+            <div class="my-2">
+                <input type="password" name="password" class="form-control" placeholder="Enter password" required>
+            </div>
+            <div class="my-2">
+                <input type="file" name="image" class="form-control" required>
+            </div>
+            <div class="my-2">
+                <input type="submit" value="Register" class="btn btn-primary w-100">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+    semesters = ["I st","II nd","III rd","IV th","V th","VI th","VII th","VIII th"];
+    document.getElementById("departments").addEventListener("change",function(){
+        years = parseInt(document.getElementById("department"+this.value).getAttribute("years"));
+        option = '<option disabled hidden selected>Choose Semester</option>';
+        for(i=0;i<years*2;i++)
+        {
+            option += `<option>${semesters[i]}</option>`;
+        }
+        document.getElementById("semesters").innerHTML = option;
+    });
+</script>
+{% endblock %}

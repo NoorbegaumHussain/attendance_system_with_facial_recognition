@@ -1,0 +1,26 @@
+{% extends "template.html" %}
+{% block title %}Login{% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <form class="col-md-6 offset-md-3 border p-5 mt-5 text-center" method="post">
+            <img src="/static/imgs/logo.jpg" width="100" class="rounded-circle">
+            <div class="my-2">
+                <h3>Login</h3>
+            </div>
+            {% if request.args.get('error')!=None %}
+            <div class="alert alert-danger">{{request.args.get('error')}}</div>
+            {% endif %}
+            <div class="my-2">
+                <input type="text" name="usn" class="form-control" placeholder="Enter USN" required maxlength="10">
+            </div>
+            <div class="my-2">
+                <input type="password" name="password" class="form-control" placeholder="Enter password" required>
+            </div>
+            <div class="my-2">
+                <input type="submit" value="Login" class="btn btn-primary w-100">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

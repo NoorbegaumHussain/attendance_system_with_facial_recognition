@@ -1,0 +1,19 @@
+{% extends "teachertemplate.html" %}
+{% block title %}Dates{% endblock %}
+{% block body %}
+<table class="table">
+    <legend class="text-center">Dates</legend>
+    <tr>
+        <th>S. No.</th>
+        <th>Date</th>
+        <th>Show</th>
+    </tr>
+    {% for date in attendance %}
+    <tr>
+        <td>{{loop.index}}</td>
+        <td>{{date[0]}}</td>
+        <td><a href="/showattendance?id={{id}}&day={{date[0]}}">Show</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

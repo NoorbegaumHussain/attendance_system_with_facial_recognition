@@ -1,0 +1,156 @@
+{% extends "studenttemplate.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 mt-5 border text-center">
+            <div class="row">
+                <div class="col-md-11 w-50 offset-3 d-flex align-items-center">
+                    <h1>Angadi Institute of Technology and Management</h1>
+                </div>
+                <div class="col-md-1">
+                    <img src="/static/imgs/logo.jpg" class="rounded-circle w-100">
+                </div>
+            </div>
+
+            <div class="row p-0">
+                <div class="col-md-2 p-0 border">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type='button' class="btn bg-light border w-100"><a href="/profile">My
+                                    Profile</a></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type='button' class="btn bg-light border w-100"><a href="/dashboard">My
+                                    Attendance</a></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 border-top">
+                    <div class="col-md-10 mt-2">
+                        <div class="border-bottom">
+                            <span>{{percentage}}</span><br>
+                            <span>Attendance %</span>
+                        </div><br>
+                        <div class="border-bottom">
+                            <span>{{total}}</span><br>
+                            <span># of Classes Taken</span>
+                        </div><br>
+                        <div class="border-bottom">
+                            <span>{{present}}</span><br>
+                            <span># of Classes Present</span>
+                        </div><br>
+                        <div class="border-bottom">
+                            <span>{{absent}}</span><br>
+                            <span># of Classes Absent</span>
+                        </div><br>
+                        <div class="border-bottom">
+                            <span>0</span><br>
+                            <span># of Classes Not Applicable </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 border-top">
+                    <div class="col-md-10">
+                        <div style="text-align: left;" class="mb-4">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <select id="subject" class="pe-5 form-control">
+                                        <option value="all">All courses</option>
+                                        {% for i in subjects %}<option value="{{i[1]}}">{{i[0]}}</option>{% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <select id="month" class="form-control">
+                                        <option value="01">January</option>
+                                        <option value="02">Februray</option>
+                                        <option value="03">March</option>
+                                        <option value="04">April</option>
+                                        <option value="05">May</option>
+                                        <option value="06">June</option>
+                                        <option value="07">July</option>
+                                        <option value="08">August</option>
+                                        <option value="09">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <canvas class="border border-dark px-5" id="myChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+<script>
+    document.querySelector("option[value='{{month}}']").setAttribute("selected","selected");
+    document.querySelector("option[value='{{subject}}']").setAttribute("selected","selected");
+    document.getElementById("month").addEventListener("change",function(){
+        window.location.href = "?month="+this.value+"&subject="+document.getElementById("subject").value;
+    });
+    document.getElementById("subject").addEventListener("change",function(){
+        window.location.href = "?month="+document.getElementById("month").value+"&subject="+this.value;
+    });
+    myChart = document.getElementById('myChart').getContext('2d');
+    massPopChart = new Chart(myChart, {
+        type: 'bar',
+        data: {
+            labels: [{% for i in subjects %}"{{i[0]}}",{% endfor %}],
+            datasets: [
+                {
+                    label: "# of Classes Taken",
+                    backgroundColor: "#3e95cd",
+                    data: [{% for i in subjects %}"{{details[i[0]]['total']}}",{% endfor %}],
+                    borderWidth: 3,
+                    borderColor: '#777',
+                    hoverBorderWidth: 3,
+                    hoverBorderColor: '#000'
+                },
+                {
+                    label: "# of Classes Present",
+                    backgroundColor: "#8e5ea2",
+                    data: [{% for i in subjects %}"{{details[i[0]]['present']}}",{% endfor %}],
+                    borderWidth: 3,
+                    borderColor: '#777',
+                    hoverBorderWidth: 3,
+                    hoverBorderColor: '#000'
+                }
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    display: true,
+                    ticks: {
+                        beginAtZero: true,
+                        max: 30
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: '# of courses',
+                        fontSize: '15',
+                        fontColor: '#000'
+                    }
+                }],
+                xAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Courses',
+                        fontSize: '15',
+                        fontColor: '#000'
+                    }
+                }]
+            },
+        }
+    });
+</script>
+{% endblock %}

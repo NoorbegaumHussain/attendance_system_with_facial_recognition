@@ -1,0 +1,23 @@
+{% extends "admintemplate.html" %}
+{% block title %}Classes{% endblock %}
+{% block body %}
+<table class="table">
+    <legend class="text-center">Classes</legend>
+    <tr>
+        <th>S. No.</th>
+        <th>Department</th>
+        <th>Semester</th>
+        <th>Division</th>
+        <th>Subjects</th>
+    </tr>
+    {% for class in classes %}
+    <tr>
+        <td>{{loop.index}}</td>
+        <td>{{class[1]}}</td>
+        <td>{{class[2]}}</td>
+        <td>{{class[3]}}</td>
+        <td><a href="/adminsubjects?id={{class[0]}}">Subjects</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

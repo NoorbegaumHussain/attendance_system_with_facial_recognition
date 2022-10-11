@@ -1,0 +1,26 @@
+{% extends "admintemplate.html" %}
+{% block title %}Add teacher{% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <form class="col-md-6 offset-md-3 border p-5 mt-5 text-center" method="post">
+            <img src="/static/imgs/logo.jpg" width="100" class="rounded-circle">
+            <div class="my-2">
+                <h3>Add Teacher</h3>
+            </div>
+            <div class="my-2">
+                <input type="text" name="name" class="form-control" placeholder="Enter name" required>
+            </div>
+            <div class="my-2">
+                <input type="text" name="faculityid" class="form-control" placeholder="Enter faculityid" required maxlength="10">
+            </div>
+            <div class="my-2">
+                <input type="password" name="password" class="form-control" placeholder="Enter password" required>
+            </div>
+            <div class="my-2">
+                <input type="submit" value="Add" class="btn btn-primary w-100">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

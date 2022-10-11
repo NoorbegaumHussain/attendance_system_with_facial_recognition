@@ -1,0 +1,23 @@
+{% extends "admintemplate.html" %}
+{% block title %}Teachers{% endblock %}
+{% block body %}
+<table class="table">
+    <legend class="text-center">Teachers <a href="/adminaddteacher" class="h6">Add</a></legend>
+    <tr>
+        <th>S. No.</th>
+        <th>Faculityid</th>
+        <th>Name</th>
+        <th>Classes</th>
+        <th>Edit</th>
+    </tr>
+    {% for teacher in teachers %}
+    <tr>
+        <td>{{loop.index}}</td>
+        <td>{{teacher[1]}}</td>
+        <td>{{teacher[2]}}</td>
+        <td><a href="/adminteacherclasses?id={{teacher[0]}}">Classes</a></td>
+        <td><a href="/admineditteacher?id={{teacher[0]}}">Edit</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

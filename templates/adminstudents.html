@@ -1,0 +1,91 @@
+{% extends "admintemplate.html" %}
+{% block title %}Students{% endblock %}
+{% block body %}
+    <table class="table" id="table">
+        <legend class="text-center">
+            Students <input id="filterUsingName" placeholder="Filter name"> <input id="filterUsingDepartment" placeholder="Filter department">
+        </legend>
+        <tr class="header">
+            <th>S. No.</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>USN</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Department</th>
+            <th>Semester</th>
+            <th>Division</th>
+            <th>Status</th>
+        </tr>
+        {% for student in students %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>
+                    <img src="{{ student[6] }}" width="50">
+                </td>
+                <td>{{ student[2] }}</td>
+                <td>{{ student[1] }}</td>
+                <td>{{ student[5] }}</td>
+                <td>{{ student[4] }}</td>
+                <td>{{ student[10] }}</td>
+                <td>{{ student[11] }}</td>
+                <td>{{ student[12] }}</td>
+                {% if student[8]==0 %}
+                    <td>
+                        <a href="/activate?id={{ student[0] }}">Activate</a>
+                    </td>
+                {% else %}
+                    <td>Activated</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+{% block scripts %}
+    <script>
+    function filterUsingName() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("filterUsingName");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("table");
+        tr = table.getElementsByTagName("tr");
+      
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[2];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }
+        }
+      }
+    function filterUsingDepartment() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("filterUsingDepartment");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("table");
+        tr = table.getElementsByTagName("tr");
+      
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[6];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }
+        }
+      }
+      document.getElementById("filterUsingName").addEventListener("keyup",filterUsingName);
+      document.getElementById("filterUsingDepartment").addEventListener("keyup",filterUsingDepartment);
+    </script>
+{% endblock %}

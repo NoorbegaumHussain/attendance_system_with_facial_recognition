@@ -1,0 +1,30 @@
+{% extends "teachertemplate.html" %}
+{% block title %}Classes{% endblock %}
+{% block body %}
+<form method="post">
+    <table class="table">
+        <tr>
+            <th>S. No.</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Semester</th>
+            <th>Division</th>
+            <th>Students</th>
+            <th>Take</th>
+            <th>Show</th>
+        </tr>
+        {% for subject in subjects %}
+        <tr>
+            <td>{{loop.index}}</td>
+            <td>{{subject[1]}}</td>
+            <td>{{subject[2]}}</td>
+            <td>{{subject[3]}}</td>
+            <td>{{subject[4]}}</td>
+            <td><a href="/students?id={{subject[0]}}">Students</a></td>
+            <td><a href="/takeattendance?id={{subject[0]}}">Take Attendance</a></td>
+            <td><a href="/showattendance?id={{subject[0]}}">Show Attendance</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</form>
+{% endblock %}

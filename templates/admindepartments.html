@@ -1,0 +1,19 @@
+{% extends "admintemplate.html" %}
+{% block title %}Classes{% endblock %}
+{% block body %}
+<table class="table">
+    <legend class="text-center">Departments <a href="/adminadddepartment" class="h6">Add</a></legend>
+    <tr>
+        <th>S. No.</th>
+        <th>Name</th>
+        <th>Edit</th>
+    </tr>
+    {% for department in departments %}
+    <tr>
+        <td>{{loop.index}}</td>
+        <td>{{department[1]}}</td>
+        <td><a href="/admineditdepartment?id={{department[0]}}">Edit</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

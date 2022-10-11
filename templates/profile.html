@@ -1,0 +1,47 @@
+{% extends "studenttemplate.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 mt-5 border text-center">
+            <div class="row">
+                <div class="col-md-11 w-50 offset-3 d-flex align-items-center">
+                    <h1>Angadi Institute of Technology and Management</h1>
+                </div>
+                <div class="col-md-1">
+                    <img src="/static/imgs/logo.jpg" class="rounded-circle w-100">
+                </div>
+            </div>
+
+            <div class="row p-0">
+                <div class="col-md-2 p-0 border">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type='button' class="btn bg-light border w-100"><a href="/profile">My Profile</a></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type='button' class="btn bg-light border w-100"><a href="/dashboard">My Attendance</a></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10 border-top" id="profile">
+                    <div class="col-md-10">
+                        <h3>Welcome <span>{{student[2]}}</span> </h3>
+                        <img src="{{student[6]}}" height="100" width="100" alt="">
+                        <div>
+                            <h3>{{student[2]}}</h3>
+                            <span>{{department}},Semester {{semester}},Sec {{division}}</span><br>
+                            <h3>Department : {{department}}</h3>
+                            <h5>{{student[4]}}</h5>
+                            <h5>{{student[5]}}</h5>
+                            <a href="/edit" class="btn btn-primary offset-9">Edit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

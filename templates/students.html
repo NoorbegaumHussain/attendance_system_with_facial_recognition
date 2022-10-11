@@ -1,0 +1,17 @@
+{% extends "teachertemplate.html" %}
+{% block title %}Students{% endblock %}
+{% block body %}
+<table class="table">
+    <legend class="text-center">Students</legend>
+    <tr>
+        <th>S. No.</th>
+        <th>Name</th>
+    </tr>
+    {% for student in students %}
+    <tr>
+        <td>{{loop.index}}</td>
+        <td>{{student[2]}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

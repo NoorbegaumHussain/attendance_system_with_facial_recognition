@@ -1,0 +1,34 @@
+{% extends "studenttemplate.html" %}
+{% block title %}Edit{% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <form class="col-md-8 offset-md-2 border p-5 mt-5" method="post" enctype="multipart/form-data">
+            <div class="row">
+                Professional Subject 
+                <select name="professionalsubjectid" class="form-control">
+                    {% for i in professionalsubjects %}
+                    <option value="{{i[0]}}">{{i[2]}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="row">
+                Open Subject 
+                <select name="opensubjectid" class="form-control">
+                    {% for i in opensubjects %}
+                    <option value="{{i[0]}}">{{i[2]}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="row">
+                <input type="submit" value="Save" class="btn btn-primary w-25 offset-md-5 mt-5">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+    document.querySelector("option[value='{{subjectid}}']").setAttribute("selected","selected")
+</script>
+{% endblock %}
